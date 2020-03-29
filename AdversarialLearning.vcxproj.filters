@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cartesian\Add.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Cartesian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Cartesian_c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\CartesianCrxHalfUniform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\CartesianCrxOnePoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\CartesianCrxTwoPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\CartesianCrxUniform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\CartesianMutNewParameterLess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\CartesianMutNonSilent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\CartesianMutOnePoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\CartesianMutSilent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Cos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Div.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Down.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Exp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\FunctionSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Left.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Mul.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Nlog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Right.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Sin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Sqrt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Step.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Sub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cartesian\Up.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SymbRegEvalOp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cartesian\Cartesian.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\CartesianCrxHalfUniform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\CartesianCrxOnePoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\CartesianCrxTwoPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\CartesianCrxUniform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\CartesianMutNewParameterLess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\CartesianMutNonSilent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\CartesianMutOnePoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\CartesianMutSilent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cartesian\FunctionSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SymbRegEvalOp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="parameters.txt" />
+  </ItemGroup>
+</Project>
