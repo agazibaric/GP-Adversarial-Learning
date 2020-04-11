@@ -23,14 +23,14 @@
 
 // crossover operators
 #include "CartesianCrxOnePoint.h"
-//#include "CartesianCrxTwoPoint.h"
-//#include "CartesianCrxHalfUniform.h"
-//#include "CartesianCrxUniform.h"
+#include "CartesianCrxTwoPoint.h"
+#include "CartesianCrxHalfUniform.h"
+#include "CartesianCrxUniform.h"
 
 // mutation operators
 #include "CartesianMutOnePoint.h"
-//#include "CartesianMutNonSilent.h"
-//#include "CartesianMutSilent.h"
-//#include "CartesianMutNewParameterLess.h"
+#include "CartesianMutNonSilent.h"
+#include "CartesianMutSilent.h"
+#include "CartesianMutNewParameterLess.h"
 
 #endif /* Cartesian_h_h */

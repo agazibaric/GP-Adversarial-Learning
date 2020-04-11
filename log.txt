@@ -1,0 +1,43 @@
+Start time: Sat Apr 11 23:10:15 2020
+
+Evaluating initial population...
+Generation: 0
+Elapsed time: 0
+Deme: 0
+Evaluations: 10
+Stats: fitness
+	max: 0
+	min: 0
+	avg: 0
+	stdev: 0
+
+Generation: 1
+Elapsed time: 0
+Deme: 0
+Evaluations: 20
+Stats: fitness
+	max: 0
+	min: 0
+	avg: 0
+	stdev: 0
+
+Generation: 10
+Elapsed time: 0
+Deme: 0
+Evaluations: 110
+Stats: fitness
+	max: 0
+	min: 0
+	avg: 0
+	stdev: 0
+
+Termination: max generation reached (10)
+
+Best of run: 
+<HallOfFame size="1">
+	<Individual size="1" gen="0">
+		<FitnessMax value="0"/>
+		<FloatingPoint size="2">	-13.4263	-1.85492</FloatingPoint>
+	</Individual>
+</HallOfFame>
+

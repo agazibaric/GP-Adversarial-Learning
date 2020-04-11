@@ -31,10 +31,9 @@ vector<CrossoverOpP> Cartesian::getCrossoverOp()
 {
 	vector<CrossoverOpP> crxOps;
 	crxOps.push_back((CrossoverOpP) (new CartesianCrxOnePoint));
-//	crxOps.push_back((CrossoverOpP) (new CartesianCrxTwoPoint));
-//	crxOps.push_back((CrossoverOpP) (new CartesianCrxHalfUniform));
-//	crxOps.push_back((CrossoverOpP) (new CartesianCrxUniform));
-
+	crxOps.push_back((CrossoverOpP) (new CartesianCrxTwoPoint));
+	crxOps.push_back((CrossoverOpP) (new CartesianCrxHalfUniform));
+	crxOps.push_back((CrossoverOpP) (new CartesianCrxUniform));
 
 	return crxOps;
 }
@@ -44,9 +43,9 @@ vector<MutationOpP> Cartesian::getMutationOp()
 {
 	vector<MutationOpP> mutOps;
 	mutOps.push_back((MutationOpP) (new CartesianMutOnePoint));
-//	mutOps.push_back((MutationOpP) (new CartesianMutNonSilent));
-//	mutOps.push_back((MutationOpP) (new CartesianMutSilent));
-//    mutOps.push_back((MutationOpP) (new CartesianMutNewParameterLess));
+	mutOps.push_back((MutationOpP) (new CartesianMutNonSilent));
+	mutOps.push_back((MutationOpP) (new CartesianMutSilent));
+    mutOps.push_back((MutationOpP) (new CartesianMutNewParameterLess));
 
     return mutOps;
 }
@@ -153,9 +152,8 @@ bool Cartesian::initialize(StateP state)
 			maxArity = nArgs;
 		}
 	}
+
 	buildRandomGenome();
-
-
 
 	return true;
 }
@@ -198,41 +196,89 @@ uint Cartesian::getGenomeSize()
 }
 
 
-void Cartesian::buildRandomGenome() {
-
-	for (int i = 0; i < nRows; i++) {
-	    for(int j = 0; j < nCols; j++) {
-
-	        int functionID = state_->getRandomizer()->getRandomInteger(nFunctions);
-	        //Pushing a function
-	        this->push_back(functionID);
-	        map<std::string, FunctionP>::iterator it;
-	        FunctionP functionName = functionSet->vFunctions[functionID];
-	        for(int k = 0; k < functionName->getNumberOfArguments(); k++) {
-
-	            this->push_back(randomConnectionGenerator(i));
-	        }
-
-	    }
+void Cartesian::buildRandomGenome()
+{
+	// create genome given user defined parameters
+	for (int i = 0; i < nCols; i++)
+	{
+		for (int j = 0; j < nRows; j++)
+		{
+			this->push_back((uint)(state_->getRandomizer()->getRandomInteger(nFunctions)));
+			for (int k = 0; k < maxArity; k++)
+			{
+				uint xZ = randomInput(i);
+				this->push_back(xZ);
+			}
+		}
 	}
-	for(int i = 0; i < nOutputs; i++) {
-	    this->push_back(randomConnectionGenerator(nRows));
+	for (int i = 0; i < nOutputs; i++)
+	{
+		this->push_back(randomOutput());
 	}
 }
 
-uint Cartesian::randomConnectionGenerator(uint rowNumber) {
-	//This is the first index which is actually limited by levels back
-    int minimum = nInputs + nCols*nLevelsBack;
+uint Cartesian::randomInput(uint column)
+{
+	int min = column > nLevelsBack ? nRows * (column - nLevelsBack) + nInputs : 0;
+	int max = nRows * column + nInputs;
+	return (uint)(state_->getRandomizer()->getRandomInteger(min, max - 1));
+}
 
-	//Index of the first element of a row
-	int firstElementOfARow = nInputs + rowNumber*nCols;
-    if(minimum <= firstElementOfARow) {
-        minimum = firstElementOfARow - nLevelsBack*nCols;
-    }
-    else {
-        minimum = 0;
-    }
-    return state_->getRandomizer()->getRandomInteger(minimum, firstElementOfARow - 1);
+uint Cartesian::randomOutput()
+{
+	// input can be output
+	int min = nLevelsBack > nCols ? 0 : nRows * (nCols - nLevelsBack);
+	int max = nRows * nCols + nInputs;
+	return (uint)(state_->getRandomizer()->getRandomInteger(min, max - 1));
+}
+
+void Cartesian::printFenotype()
+{
+	stringstream sValue;
+	sValue << "\n-------------- FENOTYPE --------------\n";
+	for (int outputIndex = this->size() - nOutputs; outputIndex < this->size(); outputIndex++) {
+		int output = this->at(outputIndex);
+		string s = getGenotypeString(output);
+		sValue << s;
+		sValue << "\n";
+	}
+	sValue << "--------------------------------------\n";
+	cout << sValue.str() << endl;
+}
+
+string Cartesian::getGenotypeString(int nodeIndex)
+{
+	stringstream sValue;
+
+	if (nodeIndex < nInputs) {
+		sValue << "x";
+		sValue << nodeIndex;
+	}
+	else
+	{
+		sValue << "(";
+		int functionIndex = (nodeIndex - nInputs) * (maxArity + 1);
+		int functionID = this->at(functionIndex);
+		FunctionP fun = functionSet->vFunctions[functionID];
+		int nArgs = fun->getNumberOfArguments();
+		if (nArgs == 1) {
+			sValue << fun->getName();
+			sValue << this->getGenotypeString(this->at(functionIndex + 1));
+		}
+		else if (nArgs == 2) {
+			string inputString = this->getGenotypeString(this->at(functionIndex + 1));
+			sValue << inputString;
+			sValue << fun->getName();
+			inputString = this->getGenotypeString(this->at(functionIndex + 2));
+			sValue << inputString;
+		}
+		else {
+			// TODO
+			sValue << "Not supported";
+		}
+		sValue << ")";
+	}
+	return sValue.str();
 }
 
 
@@ -252,7 +298,7 @@ void Cartesian::evaluate(vector<double>& inputData, vector<double>& results) {
         working_vector.push_back(result);
         operands.clear();
         result = 0;
-        i += numberOfArguments;
+		i += maxArity;
     }
     for(int i = this->size() - nOutputs; i < this->size(); i++) {
         results.push_back(working_vector[this->operator[](i)]);

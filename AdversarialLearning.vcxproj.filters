@@ -54,9 +54,6 @@
     <ClInclude Include="cartesian\Div.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cartesian\Down.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cartesian\Exp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -66,16 +63,10 @@
     <ClInclude Include="cartesian\FunctionSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cartesian\Left.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cartesian\Mul.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cartesian\Nlog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cartesian\Right.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cartesian\Sin.h">
@@ -90,10 +81,16 @@
     <ClInclude Include="cartesian\Sub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cartesian\Up.h">
+    <ClInclude Include="ExplorationOp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SymbRegEvalOp.h">
+    <ClInclude Include="EstimationOp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="target_system\TargetSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -131,7 +128,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SymbRegEvalOp.cpp">
+    <ClCompile Include="ExplorationOp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EstimationOp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -139,6 +142,7 @@
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="parameters.txt" />
+    <Text Include="parameters-estimation.txt" />
+    <Text Include="parameters-exploration.txt" />
   </ItemGroup>
 </Project>
