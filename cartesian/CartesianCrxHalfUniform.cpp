@@ -19,7 +19,6 @@ namespace CGP {
 
     bool CartesianCrxHalfUniform::mate(GenotypeP gen1, GenotypeP gen2, GenotypeP child)
     {
-        std::cout << "Cartesian half unifrom" << std::endl;
         Cartesian* p1 = (Cartesian*) (gen1.get());
         Cartesian* p2 = (Cartesian*) (gen2.get());
         Cartesian* ch = (Cartesian*) (child.get());

@@ -65,9 +65,13 @@ public:
 	*/
 	void evaluate(vector<double>& inputData, vector<double>& results);
 
-	uint randomConnectionGenerator(uint column);
+	uint randomInput(uint column);
 
+	uint randomOutput();
 
+	void printFenotype();
+
+	string getGenotypeString(int nodeIndex);
 
 
 	FunctionSetP functionSet;		//!< function nodes

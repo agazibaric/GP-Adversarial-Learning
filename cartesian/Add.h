@@ -35,8 +35,6 @@ namespace CGP
 		for (uint i = 0; i < nArguments_; i++) {
 			sum += inputs[i];
 		}
-
-		//result = inputs[1] - 1.0;
 		result = sum;
 	}
 

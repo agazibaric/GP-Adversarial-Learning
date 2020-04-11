@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../;../../ECF_trunk;C:\Program Files\boost\boost_1_57_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../;../../ECF_trunk;C:\Program Files\boost\boost_1_57_0</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -100,7 +100,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../;../../ECF_trunk;C:\Program Files\boost\boost_1_57_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../;../../ECF_trunk;C:\Program Files\boost\boost_1_57_0</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -125,6 +125,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DataManager.h" />
+    <ClInclude Include="ExplorationOp.h" />
     <ClInclude Include="cartesian\Add.h" />
     <ClInclude Include="cartesian\Cartesian.h" />
     <ClInclude Include="cartesian\CartesianCrxHalfUniform.h" />
@@ -138,22 +140,21 @@
     <ClInclude Include="cartesian\Cartesian_c.h" />
     <ClInclude Include="cartesian\Cos.h" />
     <ClInclude Include="cartesian\Div.h" />
-    <ClInclude Include="cartesian\Down.h" />
     <ClInclude Include="cartesian\Exp.h" />
     <ClInclude Include="cartesian\Function.h" />
     <ClInclude Include="cartesian\FunctionSet.h" />
-    <ClInclude Include="cartesian\Left.h" />
     <ClInclude Include="cartesian\Mul.h" />
     <ClInclude Include="cartesian\Nlog.h" />
-    <ClInclude Include="cartesian\Right.h" />
     <ClInclude Include="cartesian\Sin.h" />
     <ClInclude Include="cartesian\Sqrt.h" />
     <ClInclude Include="cartesian\Step.h" />
     <ClInclude Include="cartesian\Sub.h" />
-    <ClInclude Include="cartesian\Up.h" />
-    <ClInclude Include="SymbRegEvalOp.h" />
+    <ClInclude Include="EstimationOp.h" />
+    <ClInclude Include="target_system\TargetSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="ExplorationOp.cpp" />
     <ClCompile Include="cartesian\Cartesian.cpp" />
     <ClCompile Include="cartesian\CartesianCrxHalfUniform.cpp" />
     <ClCompile Include="cartesian\CartesianCrxOnePoint.cpp" />
@@ -165,13 +166,14 @@
     <ClCompile Include="cartesian\CartesianMutSilent.cpp" />
     <ClCompile Include="cartesian\FunctionSet.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SymbRegEvalOp.cpp" />
+    <ClCompile Include="EstimationOp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="parameters.txt" />
+    <Text Include="parameters-estimation.txt" />
+    <Text Include="parameters-exploration.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
