@@ -23,7 +23,7 @@ FitnessP ExplorationOp::evaluate(IndividualP individual)
 	vector<double> real_output;
 
 	// Get predicted output
-	CGP::Cartesian* model = (CGP::Cartesian*) dataManager->getModel().get();
+	CGP::Cartesian* model = (CGP::Cartesian*) dataManager->getBestValidationModel().get();
 	model->evaluate(input, pred_output);
 
 	// Get real output

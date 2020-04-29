@@ -36,5 +36,5 @@ TestSystemT<T>::~TestSystemT()
 template <class T>
 void TestSystemT<T>::evaluate(vector<T>& inputs, vector<T>& result)
 {
-	result.push_back(inputs[1] * inputs[0] + sin(inputs[0]) + 1.);
+	result.push_back(inputs[0] * inputs[1] + sin(inputs[0] * inputs[0]) + 1.);
 }

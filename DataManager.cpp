@@ -1,13 +1,15 @@
 #include "DataManager.h"
 
 
-DataManager::DataManager() {}
+DataManager::DataManager() {
+	this->randomizer = (RandomizerP)(new SimpleRandomizer);
+}
 
 DataManager::~DataManager() {}
 
 bool DataManager::isOver()
 {
-	return roundCount >= maxRounds || validationPassed;
+	return initialized && (roundCount >= maxRounds || validationPassed);
 }
 
 void DataManager::roundPassed()
@@ -18,6 +20,9 @@ void DataManager::roundPassed()
 void DataManager::setModel(GenotypeP model)
 {
 	this->model = model;
+	if (this->bestValidationModel == NULL) {
+		this->bestValidationModel = model;
+	}
 }
 
 GenotypeP DataManager::getModel()
@@ -128,6 +133,26 @@ GenotypeP DataManager::getBestValidationModel()
 double DataManager::getBestValidationError()
 {
 	return this->bestValidationError;
+}
+
+bool DataManager::isInitialized()
+{
+	return this->initialized;
+}
+
+void DataManager::setIsInitialized(bool initialized)
+{
+	this->initialized = initialized;
+}
+
+void DataManager::setValidationPassError(double validationPassError)
+{
+	this->validationPassError = validationPassError;
+}
+
+double DataManager::getValidationPassError()
+{
+	return this->validationPassError;
 }
 
 

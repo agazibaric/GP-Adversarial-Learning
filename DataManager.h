@@ -59,6 +59,15 @@ public:
 
 	double getBestValidationError();
 
+	bool isInitialized();
+
+	void setIsInitialized(bool initialized);
+
+	void setValidationPassError(double validationPassError);
+
+	double getValidationPassError();
+
+	RandomizerP randomizer;
 
 private:
 	// Training dataset
@@ -75,7 +84,11 @@ private:
 	uint roundCount = 0;
 	uint maxRounds;
 	bool validationPassed = false;
-	double bestValidationError;
+	double bestValidationError = numeric_limits<double>::max();
+	double validationPassError;
+
+	bool initialized = false;
+	
 };
 
 typedef boost::shared_ptr<DataManager> DataManagerP;

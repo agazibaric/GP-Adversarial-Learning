@@ -6,49 +6,9 @@
 
 
 /*
-	In Initialization target system is initialized, first random test(s) created,
-	validation dataset created, which will be used in Validation phase.
-*/
-void initialization(DataManagerP dataManager)
-{
-	RandomizerP randomizer = (RandomizerP)(new SimpleRandomizer);
-	TargetSystemP targetSystem = (TargetSystemP)(new TestSystem);
-	dataManager->setTargetSystem(targetSystem);
-
-	dataManager->setMaxRounds(100);
-	uint nInputs = 2;
-	uint nOutputs = 1;
-	double lower_bound = -20;
-	double upper_bound = 20;
-	vector<double> input;
-	vector<double> output;
-
-	// Create first random test
-	for (uint i = 0; i < nInputs; i++) {
-		input.push_back(lower_bound + (upper_bound - lower_bound) * randomizer->getRandomDouble());
-	}
-	dataManager->getTargetSystem()->evaluate(input, output);
-	dataManager->addTrainingData(input, output);
-
-	// Add validation dataset
-	uint nTests = 50;
-	for (int t = 0; t < nTests; t++) {
-		vector<double> input_val;
-		vector<double> output_val;
-
-		for (uint i = 0; i < nInputs; i++) {
-			input_val.push_back(lower_bound + (upper_bound - lower_bound) * randomizer->getRandomDouble());
-		}
-
-		dataManager->getTargetSystem()->evaluate(input_val, output_val);
-		dataManager->addValidationData(input_val, output_val);
-	}
-}
-
-/*
 	Estimation phase represents symbolic regression
 	where we try to find the model that best describes training dataset.
-	Model is evaluated against traing dataset found so far.
+	Model is evaluated against training dataset found so far.
 */
 void estimation_phase(int argc, char **argv, DataManagerP dataManager)
 {
@@ -58,11 +18,12 @@ void estimation_phase(int argc, char **argv, DataManagerP dataManager)
 	state_estimation->addGenotype(cgp);
 
 	// Get training data collected so far
-	vector<vector<double>> xs = dataManager->getInputs();
-	vector<vector<double>> ys = dataManager->getOutputs();
+	//vector<vector<double>> xs = dataManager->getInputs();
+	//vector<vector<double>> ys = dataManager->getOutputs();
 
-	EstimationOpP explorationOp(new EstimationOp(xs, ys));
-	state_estimation->setEvalOp(explorationOp);
+	//EstimationOpP explorationOp(new EstimationOp(xs, ys));
+	EstimationOpP estimationOp(new EstimationOp(dataManager));
+	state_estimation->setEvalOp(estimationOp);
 	state_estimation->initialize(argc, argv);
 	state_estimation->run();
 
@@ -107,13 +68,13 @@ void exploration_phase(int argc, char **argv, DataManagerP dataManager)
 }
 
 /*
-	In Validation phase best model found so far is tested on validation dataset.
+	In Validation phase best model found in estimation phase is tested on validation dataset.
 	Results are recorded in dataManager.
 */
 void validation(DataManagerP dataManager) 
 {
 	CGP::Cartesian* cartesian = (CGP::Cartesian*) dataManager->getModel().get();
-	double maxError = 5.;
+	double maxError = dataManager->getValidationPassError();
 	double error = 0.;
 	uint nOutputs = cartesian->nOutputs;
 
@@ -132,6 +93,10 @@ void validation(DataManagerP dataManager)
 		}
 	}
 
+	if (error <= maxError) {
+		cartesian->printFenotype();
+	}
+
 	dataManager->setValidationModel(dataManager->getModel(), error);
 	dataManager->setValidationPassed(error <= maxError);
 }
@@ -139,7 +104,7 @@ void validation(DataManagerP dataManager)
 
 /*
 	Adversarial Learning (Coevolution) flow:
-		INITIALIZATION
+		INITIALIZATION (done in EstimationOp::initialize)
 		WHILE validation is not passed and number of rounds is less then maxRounds 
 		      (or some other condition that could be managed in DataManager) DO:
 			  ESTIMATION PHASE
@@ -152,8 +117,6 @@ int main(int argc, char **argv)
 	char parameters_exploration[] = "parameters-exploration.txt";
 	
 	DataManagerP dataManager(new DataManager);
-
-	initialization(dataManager);
 
 	while (!dataManager->isOver()) {
 		argv[1] = parameters_estimation;

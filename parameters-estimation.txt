@@ -17,6 +17,15 @@
 	</Genotype>
 
 	<Registry>
+		<Entry key="nInputs">2</Entry>
+		<Entry key="nOutputs">1</Entry>
+		<Entry key="ubound">20</Entry>
+		<Entry key="lbound">-20</Entry>
+
+		<Entry key="maxRounds">100</Entry>
+		<Entry key="validationSize">50</Entry>
+		<Entry key="validationPassError">2</Entry>
+		
 		<Entry key="population.size">50</Entry>
 		<Entry key="term.maxgen">50</Entry>
 		<Entry key="term.fitnessval">0</Entry>
@@ -24,6 +33,5 @@
 		<Entry key="log.frequency">100</Entry>
 		<Entry key="log.filename">log.txt</Entry>
 
-		<Entry key="nvars">2</Entry>
 	</Registry>
 </ECF>
